@@ -1,0 +1,14 @@
+/file/read-case/path/to/mesh.msh
+/mesh/polyhedra/convert-domain
+/file/set-tui-version "24.1"
+/define/models/viscous kw-sst yes
+/define/boundary-conditions/velocity-inlet inlet no no yes yes no 7.83 no 0 no no yes 5 10
+/solve/report-definitions/add drag_coeff drag average-over 1 force-vector 0 0 -1 per-zone no thread-names shape () scaled yes ()
+/solve/report-definitions/add drag_force drag average-over 1 force-vector 0 0 -1 per-zone no thread-names shape () scaled no ()
+/solve/report-definitions/add lift_coeff lift average-over 1 force-vector 0 1 0 per-zone no thread-names shape () scaled yes ()
+/solve/report-definitions/add lift_force lift average-over 1 force-vector 0 1 0 per-zone no thread-names shape () scaled no ()
+/solve/report-files/add report-file-i report-defs drag_force drag_coeff lift_force lift_coeff () ()
+/solve/initialize/hyb-initialization yes
+/solve/iterate 250
+/file/write-case-data "path/to/results.cas.h5"
+/exit
